@@ -55,10 +55,10 @@ with st.sidebar:
     process_url_clicked = st.button("🚀 Process URLs", use_container_width=True)
     
     # API Status indicator
-    if os.getenv("GOOGLE_API_KEY"):
+    if os.getenv("GEMINI_API_KEY"):
         st.success("✅ Gemini API Connected")
     else:
-        st.error("❌ Add GOOGLE_API_KEY to .env file")
+        st.error("❌ Add GEMINI_API_KEY to .env file")
 
 # Main content area
 st.markdown("""
@@ -78,7 +78,8 @@ file_path = "datascout_knowledge.pkl"
 # Use Google Gemini as the LLM
 llm = ChatGoogleGenerativeAI(
     model="gemini-1.5-flash",
-    temperature=0.9
+    temperature=0.9,
+    google_api_key=os.getenv("GEMINI_API_KEY")
 )
 
 if process_url_clicked:
